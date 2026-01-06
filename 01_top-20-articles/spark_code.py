@@ -2,17 +2,17 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import sum
 from pyspark.sql.types import StructType, StructField, StringType, LongType
 
-log_folder = "/Users/sami.hached/Documents/wiki-dataset/pageviews-2020-01-01/"
-spark = SparkSession.builder.appName("SimpleApp").getOrCreate()
+log_folder = "/Users/sami.hached/Documents/wiki-dataset/pageviews-2020-01/01/"
+spark = SparkSession.builder.appName("task_01").getOrCreate()
 
-schema = StructType([
+pageview_schema = StructType([
     StructField("domain_code", StringType(), True),
     StructField("page_title", StringType(), True),
     StructField("count_views", LongType(), True),
     StructField("total_response_size", LongType(), True),
 ])
 
-log_data = spark.read.csv(log_folder, sep=" ", schema=schema)
+log_data = spark.read.csv(log_folder, sep=" ", schema=pageview_schema)
 log_data.createOrReplaceTempView("log_data")
 spark.sql("""
     SELECT page_title, SUM(count_views) AS daily_views
