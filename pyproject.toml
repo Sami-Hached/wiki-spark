@@ -1,0 +1,8 @@
+[project]
+name = "learning-pyspark"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "pyspark>=4.0.1",
+]
