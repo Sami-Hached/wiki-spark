@@ -22,7 +22,7 @@ spark.sql("""
         page_title NOT IN ('-', 'Main_Page', 'Special:Search')
     GROUP BY page_title
     ORDER BY daily_views DESC LIMIT 20
-""").show()
+""").write.csv(f"top_20_articles_sql.csv")
 
 # Another approach
 (
@@ -32,6 +32,8 @@ spark.sql("""
     .groupBy("page_title")
     .agg(sum("count_views").alias("daily_views"))
     .orderBy("daily_views", ascending=False)
-    .show(20)
+    .limit(20)
+    .write.csv(f"top_20_articles_python.csv")
  )
+
 spark.stop()
