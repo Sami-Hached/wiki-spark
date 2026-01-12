@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import sum
 from pyspark.sql.types import StructType, StructField, StringType, LongType
 
-log_folder = "/Users/sami.hached/Documents/wiki-dataset/pageviews-2020-01/01/"
+log_folder = "/Users/sami.hached/Documents/wiki-dataset/pageviews-2020-01/day=01/"
 spark = SparkSession.builder.appName("task_01").getOrCreate()
 
 pageview_schema = StructType([
